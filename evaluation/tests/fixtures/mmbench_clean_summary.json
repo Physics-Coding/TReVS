@@ -1,0 +1,18 @@
+{
+  "input_rows": 4,
+  "input_duplicate_indices": 0,
+  "clean_rows": 4,
+  "official_rows_missing": 0,
+  "runs": [
+    {
+      "requested_judge": "exact_matching",
+      "effective_judge": "exact_matching",
+      "result": [
+        {
+          "split": "dev",
+          "Overall": 0.75
+        }
+      ]
+    }
+  ]
+}

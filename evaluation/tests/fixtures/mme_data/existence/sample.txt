@@ -1,0 +1,2 @@
+Is the synthetic object visible? Please answer yes or no.	Yes
+Is the synthetic object absent? Please answer yes or no.	No

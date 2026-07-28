@@ -1,0 +1,17 @@
+name: trevs-qwen
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.10.19
+  - pip=25.1
+  - git
+  - packaging
+  - setuptools>=69
+  - wheel
+  - pytorch=2.5.1
+  - torchvision=0.20.1
+  - pytorch-cuda=12.1
+  - cuda-version=12.1
+  - numpy=2.2.6

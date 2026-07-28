@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "families": {
+    "llava15": {
+      "display_name": "LLaVA-1.5",
+      "datasets": ["gqa", "textvqa", "mme", "mmbench", "mmbench_cn", "sqa", "pope", "vqav2"],
+      "attention_backend": "flash_attention_2",
+      "environment": "llava_family",
+      "image_resolution": "336x336",
+      "frames": 1,
+      "crops": 1,
+      "llm_layers": 32,
+      "presets": {
+        "32": {
+          "method": "trevs",
+          "route_topk": 48,
+          "route_fps": 16,
+          "stage1_visual_tokens": 64,
+          "phase_transition_layer": 8,
+          "phase_transition_keep": 21,
+          "average_visual_tokens": 31.75
+        },
+        "64": {
+          "method": "trevs",
+          "route_topk": 96,
+          "route_fps": 32,
+          "stage1_visual_tokens": 128,
+          "phase_transition_layer": 8,
+          "phase_transition_keep": 42,
+          "average_visual_tokens": 63.5
+        },
+        "128": {
+          "method": "trevs",
+          "route_topk": 192,
+          "route_fps": 64,
+          "stage1_visual_tokens": 256,
+          "phase_transition_layer": 8,
+          "phase_transition_keep": 85,
+          "average_visual_tokens": 127.75
+        }
+      },
+      "trevs": {
+        "stage1_scoring": "trevs",
+        "phase_scoring": "priority_heads",
+        "use_sink_token": false,
+        "use_consistency_reward": true,
+        "text_score_mode": "rms",
+        "visual_temperature": 1.4,
+        "text_temperature": 1.0,
+        "semantic_layer": "default"
+      },
+      "generation": {
+        "temperature": 0.0,
+        "do_sample": false,
+        "num_beams": 1,
+        "max_new_tokens": 128
+      }
+    },
+    "llava_next": {
+      "display_name": "LLaVA-NeXT",
+      "datasets": ["gqa", "textvqa", "mme", "mmbench", "mmbench_cn", "sqa", "pope", "vqav2"],
+      "attention_backend": "flash_attention_2",
+      "environment": "llava_family",
+      "image_resolution": "672x672",
+      "frames": 1,
+      "crops": 5,
+      "llm_layers": 32,
+      "presets": {
+        "160": {
+          "method": "trevs",
+          "route_topk": 48,
+          "route_fps": 16,
+          "stage1_visual_tokens": 320,
+          "phase_transition_layer": 8,
+          "phase_transition_keep": 106,
+          "average_visual_tokens": 159.5
+        },
+        "320": {
+          "method": "trevs",
+          "route_topk": 96,
+          "route_fps": 32,
+          "stage1_visual_tokens": 640,
+          "phase_transition_layer": 8,
+          "phase_transition_keep": 213,
+          "average_visual_tokens": 319.75
+        },
+        "640": {
+          "method": "trevs",
+          "route_topk": 192,
+          "route_fps": 64,
+          "stage1_visual_tokens": 1280,
+          "phase_transition_layer": 8,
+          "phase_transition_keep": 426,
+          "average_visual_tokens": 639.5
+        }
+      },
+      "trevs": {
+        "stage1_scoring": "trevs",
+        "phase_scoring": "priority_heads",
+        "use_sink_token": false,
+        "use_consistency_reward": true,
+        "text_score_mode": "rms",
+        "visual_temperature": 1.4,
+        "text_temperature": 1.0,
+        "semantic_layer": "default"
+      },
+      "generation": {
+        "temperature": 0.0,
+        "do_sample": false,
+        "num_beams": 1,
+        "max_new_tokens": 128
+      }
+    },
+    "qwen25vl": {
+      "display_name": "Qwen2.5-VL",
+      "datasets": ["gqa", "textvqa", "mme", "mmbench", "mmbench_cn", "sqa", "pope", "vqav2"],
+      "attention_backend": "sdpa",
+      "environment": "qwen",
+      "image_resolution": "1120x896",
+      "frames": 1,
+      "crops": 1,
+      "llm_layers": 28,
+      "presets": {
+        "142": {
+          "method": "trevs",
+          "route_topk": 204,
+          "route_fps": 68,
+          "stage1_visual_tokens": 272,
+          "phase_transition_layer": 8,
+          "phase_transition_keep": 90,
+          "average_visual_tokens": 142.0
+        },
+        "284": {
+          "method": "trevs",
+          "route_topk": 408,
+          "route_fps": 136,
+          "stage1_visual_tokens": 544,
+          "phase_transition_layer": 8,
+          "phase_transition_keep": 180,
+          "average_visual_tokens": 284.0
+        },
+        "426": {
+          "method": "trevs",
+          "route_topk": 612,
+          "route_fps": 204,
+          "stage1_visual_tokens": 816,
+          "phase_transition_layer": 8,
+          "phase_transition_keep": 270,
+          "average_visual_tokens": 426.0
+        },
+        "dense": {
+          "method": "dense",
+          "route_topk": null,
+          "route_fps": null,
+          "stage1_visual_tokens": 1280,
+          "phase_transition_layer": null,
+          "phase_transition_keep": 1280,
+          "average_visual_tokens": 1280.0
+        }
+      },
+      "trevs": {
+        "stage1_scoring": "trevs",
+        "phase_scoring": "priority_heads",
+        "use_sink_token": false,
+        "use_consistency_reward": true,
+        "text_score_mode": "rms",
+        "visual_temperature": 1.4,
+        "text_temperature": 1.0,
+        "semantic_layer": "default"
+      },
+      "generation": {
+        "temperature": 0.0,
+        "do_sample": false,
+        "num_beams": 1,
+        "max_new_tokens": 128
+      }
+    },
+    "videollava": {
+      "display_name": "Video-LLaVA",
+      "datasets": ["tgif", "msvd", "msrvtt"],
+      "attention_backend": "sdpa",
+      "environment": "llava_family",
+      "image_resolution": "224x224",
+      "frames": 8,
+      "patches_per_frame": 256,
+      "crops": 1,
+      "llm_layers": 32,
+      "presets": {
+        "136": {
+          "method": "trevs",
+          "route_topk": 26,
+          "route_fps": 8,
+          "stage1_visual_tokens": 272,
+          "phase_transition_layer": 8,
+          "phase_transition_keep": 90,
+          "average_visual_tokens": 135.5
+        },
+        "960": {
+          "method": "trevs",
+          "route_topk": 180,
+          "route_fps": 60,
+          "stage1_visual_tokens": 1920,
+          "phase_transition_layer": 8,
+          "phase_transition_keep": 640,
+          "average_visual_tokens": 960.0
+        },
+        "dense": {
+          "method": "dense",
+          "route_topk": null,
+          "route_fps": null,
+          "stage1_visual_tokens": 2048,
+          "phase_transition_layer": null,
+          "phase_transition_keep": 2048,
+          "average_visual_tokens": 2048.0
+        },
+        "custom": {
+          "method": "trevs",
+          "route_topk": null,
+          "route_fps": null,
+          "stage1_visual_tokens": null,
+          "phase_transition_layer": 8,
+          "phase_transition_keep": null,
+          "average_visual_tokens": null
+        }
+      },
+      "trevs": {
+        "stage1_scoring": "trevs",
+        "phase_scoring": "priority_heads",
+        "use_sink_token": false,
+        "use_consistency_reward": true,
+        "text_score_mode": "rms",
+        "visual_temperature": 1.0,
+        "text_temperature": 1.0,
+        "semantic_layer": "none"
+      },
+      "generation": {
+        "temperature": 0.0,
+        "do_sample": false,
+        "num_beams": 1,
+        "max_new_tokens": 1024
+      }
+    }
+  }
+}

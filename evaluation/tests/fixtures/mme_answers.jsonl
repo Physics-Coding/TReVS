@@ -1,0 +1,2 @@
+{"question_id": "existence/sample.jpg", "prompt": "Is the synthetic object visible? Please answer yes or no.", "text": "Yes.\nVisible"}
+{"question_id": "existence/sample.jpg", "prompt": "Is the synthetic object absent? Please answer yes or no.", "text": "No\tnot present"}

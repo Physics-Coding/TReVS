@@ -1,0 +1,16 @@
+{
+  "acc": 50.0,
+  "correct": 1,
+  "count": 2,
+  "image_accuracy_percent": 100.0,
+  "image_correct": 1,
+  "image_count": 1,
+  "results": {
+    "synthetic-1": 0,
+    "synthetic-2": 1
+  },
+  "outputs": {
+    "synthetic-1": "A",
+    "synthetic-2": "B"
+  }
+}

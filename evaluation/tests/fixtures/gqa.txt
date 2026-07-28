@@ -1,0 +1,3 @@
+accuracy = 62.50
+binary = 79.10
+open = 48.20

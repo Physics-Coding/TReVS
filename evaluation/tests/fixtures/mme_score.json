@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "dataset": "mme",
+  "status": "scored",
+  "evaluator": "official_mme",
+  "metrics": {
+    "perception_score": 1500.0,
+    "cognition_score": 600.0,
+    "overall_score": 2100.0
+  },
+  "missing_categories": []
+}

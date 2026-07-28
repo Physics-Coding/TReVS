@@ -1,0 +1,28 @@
+Category: random, # samples: 2
+TP	FP	TN	FN	
+1	0	1	0
+Accuracy: 1.0
+Precision: 1.0
+Recall: 1.0
+F1 score: 1.0
+Yes ratio: 0.5
+====================================
+Category: popular, # samples: 2
+TP	FP	TN	FN	
+1	1	0	0
+Accuracy: 0.5
+Precision: 0.5
+Recall: 1.0
+F1 score: 0.6666666667
+Yes ratio: 1.0
+====================================
+Category: adversarial, # samples: 2
+TP	FP	TN	FN	
+0	0	2	0
+Accuracy: 1.0
+Precision: 0.0
+Recall: 0.0
+F1 score: 0.0
+Yes ratio: 0.0
+====================================
+0.5555555556
