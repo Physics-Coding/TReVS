@@ -91,7 +91,11 @@ BANNED_SUFFIXES = {
     ".zip",
 }
 PRIVATE_PATH_PATTERN = re.compile(
-    r"(?i)(?:/" + r"home/|/" + r"users/|/data\d*/" + r"wang|[a-z]:\\\\" + r"users\\\\)"
+    r"(?i)(?<![a-z0-9._/-])(?:"
+    r"/(?:home|users)/[a-z0-9._-]+(?:/|$)"
+    r"|/data\d+/[a-z0-9._-]+(?:/|$)"
+    r"|[a-z]:\\users\\[a-z0-9._-]+(?:\\|$)"
+    r")"
 )
 INTERNAL_NETWORK_PATTERN = re.compile(
     r"(?i)(?:https?://|ssh://)?(?:"
@@ -101,7 +105,6 @@ INTERNAL_NETWORK_PATTERN = re.compile(
     + r"|172\.(?:1[6-9]|2\d|3[01])\.\d+\.\d+)(?::\d+)?(?=$|[^a-z0-9.-])"
 )
 TEXT_PATTERNS = (
-    ("personal identifier", re.compile(r"(?i)wang[._ -]?jing|jing[._ -]?wang|\u738b\u9759")),
     ("private absolute path", PRIVATE_PATH_PATTERN),
     ("internal network address", INTERNAL_NETWORK_PATTERN),
     ("private email", re.compile(r"(?i)\b[A-Z0-9._%+-]+@(?!example\.(?:com|org)\b)[A-Z0-9.-]+\.[A-Z]{2,}\b")),
@@ -123,7 +126,6 @@ TEXT_PATTERNS = (
     ),
 )
 PATH_PATTERNS = (
-    ("personal identifier in path", TEXT_PATTERNS[0][1]),
     (
         "student identifier in path",
         re.compile(r"(?i)(?:student[ _-]?(?:id|number)|\u5b66\u53f7)[ _.-]*[A-Z]?\d{6,14}"),

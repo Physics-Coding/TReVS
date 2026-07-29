@@ -118,6 +118,8 @@ scores/
 !evaluation/tests/fixtures/**/*.tsv
 
 # Archives and large binary research artifacts
+# Final OpenReview artifact is generated locally and uploaded separately.
+/TReVS_AAAI27_Anonymous.zip
 *.zip
 *.tgz
 *.tar

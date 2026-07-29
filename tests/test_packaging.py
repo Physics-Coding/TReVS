@@ -50,16 +50,21 @@ class AnonymityScanTests(unittest.TestCase):
         self.assertIn("OpenAI-style secret", reasons)
         self.assertTrue(any(reason.startswith("forbidden artifact type") for reason in reasons))
 
-    def test_identity_in_filename_student_id_and_presentation_are_rejected(self) -> None:
-        with tempfile.TemporaryDirectory() as directory:
+    def test_configured_identity_student_id_and_presentation_are_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as directory, tempfile.TemporaryDirectory() as external:
             root = Path(directory)
-            identity_name = "wang" + "jing_notes.py"
+            patterns = Path(external) / "identity-patterns.txt"
+            patterns.write_text("Example Researcher\n", encoding="utf-8")
+            identity_name = "Example Researcher notes.py"
             student_name = "student_" + "id_" + "1234" + "5678.txt"
             (root / identity_name).write_text("value = 1\n", encoding="utf-8")
             (root / student_name).write_text("fixture\n", encoding="utf-8")
             (root / "slides.pptx").write_bytes(b"fixture")
-            reasons = {finding.reason for finding in scan(root)}
-        self.assertIn("personal identifier in path", reasons)
+            reasons = {
+                finding.reason
+                for finding in scan(root, identity_patterns_file=patterns)
+            }
+        self.assertIn("configured identity pattern in path", reasons)
         self.assertIn("student identifier in path", reasons)
         self.assertTrue(any(reason.startswith("forbidden artifact type") for reason in reasons))
 

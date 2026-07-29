@@ -417,9 +417,14 @@ def anonymity_scan_command(args: argparse.Namespace, root: Path) -> list[str]:
     return command
 
 
-def validate_source_tree(root: Path, args: argparse.Namespace) -> None:
-    environment = validation_environment(args, root)
-    run_checked(anonymity_scan_command(args, root), root, environment)
+def validate_source_tree(root: Path, allowlist: Path, args: argparse.Namespace) -> None:
+    """Scan the exact source selection without traversing local Git/workspace state."""
+
+    with tempfile.TemporaryDirectory(prefix="trevs-package-source-scan.") as directory:
+        source_view = Path(directory) / args.package_name
+        stage_tree(root, allowlist, source_view)
+        environment = validation_environment(args, source_view)
+        run_checked(anonymity_scan_command(args, source_view), source_view, environment)
 
 
 def validate_tree(root: Path, args: argparse.Namespace) -> None:
@@ -572,7 +577,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 or destination == validation_attestation_path(requested_stage)
             ):
                 raise PackageError("ZIP output must be separate from the validated stage and its attestation.")
-        validate_source_tree(root, args)
+        validate_source_tree(root, allowlist, args)
         if args.write_source_manifest:
             write_source_manifest(root, allowlist)
         if args.stage_dir:
