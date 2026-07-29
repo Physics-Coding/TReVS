@@ -42,21 +42,22 @@ class ExpectedResultsTests(unittest.TestCase):
             (row["family"], row["preset"], row["dataset"], row["metric"]): float(row["value"])
             for row in self.rows
         }
-        self.assertEqual(values[("llava15", "32", "mme", "overall_score")], 1749.1)
+        self.assertEqual(values[("llava15", "32", "mme", "overall_score")], 1651.0)
         self.assertEqual(
             values[("llava15", "64", "aggregate", "relative_accuracy_percent")],
-            97.1,
+            96.5,
         )
-        self.assertEqual(values[("llava15", "128", "gqa", "accuracy_percent")], 60.4)
-        self.assertEqual(values[("qwen25vl", "142", "textvqa", "accuracy_percent")], 72.0)
-        self.assertEqual(values[("qwen25vl", "284", "mme", "overall_score")], 2372.0)
+        self.assertEqual(values[("llava15", "128", "gqa", "accuracy_percent")], 60.3)
+        self.assertEqual(values[("llava_next", "320", "mme", "overall_score")], 1826.0)
         self.assertEqual(
-            values[("qwen25vl", "426", "aggregate", "relative_accuracy_percent")],
-            100.1,
+            values[("videollava", "136", "aggregate", "relative_accuracy_percent")],
+            99.0,
         )
 
-    def test_unreported_families_have_no_invented_scores(self) -> None:
-        self.assertEqual({row["family"] for row in self.rows}, {"llava15", "qwen25vl"})
+    def test_only_table_backed_family_results_are_distributed(self) -> None:
+        families = {row["family"] for row in self.rows}
+        self.assertEqual(families, {"llava15", "llava_next", "videollava"})
+        self.assertNotIn("qwen25vl", families)
 
 
 if __name__ == "__main__":

@@ -143,9 +143,9 @@ run metadata.
 
 The supported display presets are 160, 320 and 640. The sparse path uses a
 fixed 672x672 input represented as one base crop and four local crops. It does
-not use variable `spatial_unpad` or append `image_newline`. These presets are
-code-supported, but this artifact intentionally does not place unverified
-LLaVA-NeXT scores in `paper_metrics.csv`.
+not use variable `spatial_unpad` or append `image_newline`. The expected-results
+table contains only the displayed 160- and 320-token results; it deliberately
+does not claim a result for the code-supported 640-token preset.
 
 ### Qwen2.5-VL
 
@@ -248,36 +248,39 @@ launcher, command argument, result config or ZIP.
 
 All relative-accuracy calculations use the displayed benchmark precision.
 
-LLaVA-1.5 uses eight dense references in this order:
+The expected-results CSV records only the values displayed in the supplied
+result tables. LLaVA-1.5 therefore records seven individual benchmark metrics
+plus the published RelAcc value for each displayed preset. It does not retain a
+VQAv2 row that is absent from the table.
+
+The LLaVA-1.5 table's RelAcc is a published aggregate and must be compared as
+reported. It must not be recomputed from the reduced CSV, because that CSV does
+not distribute table-absent component values.
+
+LLaVA-NeXT RelAcc uses the four displayed dense references:
 
 ```text
-GQA=62.0, ScienceQA-Image=69.5, TextVQA=58.2, POPE=85.9,
-MME=1862, VQAv2=78.5, MMBench=64.7, MMBench-CN=58.3
-```
-
-```text
-RelAcc = 100/8 * sum(TReVS_metric_i / dense_metric_i)
-```
-
-Each LLaVA-1.5 preset therefore has nine CSV records: eight benchmark metrics
-plus one derived RelAcc record. RelAcc is not included again in its own
-denominator. GQA, VQAv2, MMBench and MMBench-CN values originate from external
-official evaluation even though their expected paper values are listed in the
-CSV.
-
-Qwen2.5-VL uses four dense references:
-
-```text
-GQA=59.7, TextVQA=76.7, MME=2324, MMBench=83.8
+GQA=64.2, TextVQA=61.3, MME=1842, MMBench=67.9
 ```
 
 ```text
 RelAcc = 100/4 * sum(TReVS_metric_i / dense_metric_i)
 ```
 
-The expected CSV contains one-decimal paper displays and tolerance 0.1. A
-comparison tool must reject family, preset, split, metric or evaluator
-mismatches instead of applying the tolerance to incomparable runs.
+Video-LLaVA RelAcc uses the three displayed dense references:
+
+```text
+TGIF=48.7, MSVD=70.1, MSRVTT=57.4
+```
+
+```text
+RelAcc = 100/3 * sum(TReVS_metric_i / dense_metric_i)
+```
+
+The CSV contains only table-backed, one-decimal paper displays with tolerance
+0.1. Qwen results are intentionally not distributed. A comparison tool must
+reject family, preset, split, metric or evaluator mismatches instead of
+applying the tolerance to incomparable runs.
 
 ## 7. Seed and determinism
 

@@ -61,7 +61,7 @@ the source package.
 Predictions may reproduce benchmark questions, media identifiers, or reference
 metadata. Therefore complete JSON/JSONL/XLSX predictions, judge responses, and
 official submission files are run artifacts and are excluded from the anonymous
-ZIP. Only synthetic fixtures and aggregate values in
+ZIP. Only synthetic fixtures and table-backed metric values in
 `expected_results/paper_metrics.csv` are distributed.
 
 The VideoQA text judge is optional and user-selected. It is not needed for
